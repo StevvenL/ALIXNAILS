@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>App de Citas Odontológicas</title>
+ <link rel="stylesheet" href="style.css">
+ <!-- Librerías para exportar a PDF -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+ <!-- Librería para exportar a Excel (XLSX) -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+
+<body>
+ <header>
+  <h1>App de Citas ALIX NAILS</h1>
+ </header>
+
+ <!-- Menú de navegación -->
+ <nav>
+  <button onclick="mostrarModulo('inicio')">Inicio</button>
+  <button onclick="mostrarModulo('cliente')">Clientes</button>
+  <button onclick="mostrarModulo('manicurista')">Manicuristas</button>
+  <button onclick="mostrarModulo('agendamiento')">Agendamiento</button>
+  <button onclick="mostrarModulo('citas')">Citas Agendadas</button>
+  <button onclick="mostrarModulo('tratamientos')">Tratamientos</button>
+ </nav>
+
+ <!-- Módulo de Inicio -->
+ <div id="inicio" class="module active">
+  <h2>Bienvenido a la App de citas de ALIX NAILS</h2>
+  <p>Seleccione un módulo para comenzar.</p>
+ </div>
+
+ <!-- Módulo de Clientes -->
+ <div id="cliente" class="module">
+  <h2>Registro de clientes</h2>
+  <form id="form-clientes">
+   <!-- Datos básicos -->
+   <label for="cliente-id">Identificación</label>
+   <input type="text" id="cliente-id" required>
+
+   <label for="cliente-nombres">Nombres</label>
+   <input type="text" id="cliente-nombres" required>
+
+   <label for="cliente-telefono">Teléfono</label>
+   <input type="tel" id="cliente-telefono" required>
+
+   <label for="cliente-correo">Correo</label>
+   <input type="email" id="cliente-correo" required>
+
+   <!-- Nuevos campos -->
+   <label for="cliente-fechaNacimiento">Fecha de Nacimiento</label>
+   <input type="date" id="cliente-fechaNacimiento" required>
+
+   <label for="cliente-edad">Edad</label>
+   <input type="number" id="cliente-edad" required>
+
+   <label for="cliente-ciudad">Ciudad</label>
+   <input type="text" id="cliente-ciudad" required>
+
+   <label for="cliente-sexo">Sexo</label>
+   <select id="cliente-sexo" required>
+    <option value="">Seleccione...</option>
+    <option value="Masculino">Masculino</option>
+    <option value="Femenino">Femenino</option>
+    <!-- <option value="Otro">Otro</option> -->
+   </select>
+
+   <label for="cliente-estadoCivil">Estado Civil</label>
+   <select id="cliente-estadoCivil" required>
+    <option value="">Seleccione...</option>
+    <option value="Soltero">Soltero</option>
+    <option value="Casado">Casado</option>
+    <option value="Divorciado">Divorciado</option>
+    <option value="Viudo">Viudo</option>
+    <option value="Otro">Otro</option>
+   </select>
+
+   <label for="cliente-motivoConsulta">Motivo de la Consulta</label>
+   <textarea id="cliente-motivoConsulta" required></textarea>
+
+   <!-- Antecedentes personales y/o familiares -->
+   <fieldset class="antecedentes">
+    <legend>Antecedentes personales y/o familiares</legend>
+    <div class="antecedentes-grid">
+     <div class="antecedentes-header">Antecedente</div>
+     <div class="antecedentes-header">Personales</div>
+     <div class="antecedentes-header">Familiares</div>
+
+     <div class="antecedente-label">Enfermedades cardiovasculares</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]"
+       value="enfermedades_cardiovasculares"></div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]"
+       value="enfermedades_cardiovasculares"></div>
+
+     <div class="antecedente-label">Hiper o Hipo tensión arterial</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="tension_arterial">
+     </div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="tension_arterial">
+     </div>
+
+     <div class="antecedente-label">Fiebre reumática</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="fiebre_reumatica">
+     </div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="fiebre_reumatica">
+     </div>
+
+     <div class="antecedente-label">Alta coagulación</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="alta_coagulacion">
+     </div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="alta_coagulacion">
+     </div>
+
+     <div class="antecedente-label">Alergias a la anestesia o a drogas</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="alergias"></div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="alergias"></div>
+
+     <div class="antecedente-label">Antecedentes quirúrgicos</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="quirurgicos"></div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="quirurgicos"></div>
+
+     <div class="antecedente-label">Antecedentes traumáticos</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="traumaticos"></div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="traumaticos"></div>
+
+     <div class="antecedente-label">Epilepsia</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="epilepsia"></div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="epilepsia"></div>
+
+     <div class="antecedente-label">Hepatitis</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="hepatitis"></div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="hepatitis"></div>
+
+     <div class="antecedente-label">Sinusitis</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="sinusitis"></div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="sinusitis"></div>
+
+     <div class="antecedente-label">Diabetes</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="diabetes"></div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="diabetes"></div>
+
+     <div class="antecedente-label">VIH</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="vih"></div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="vih"></div>
+
+     <div class="antecedente-label">Otros</div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_personal[]" value="otros"></div>
+     <div class="antecedente-checkbox"><input type="checkbox" name="antecedente_familiar[]" value="otros"></div>
+    </div>
+   </fieldset>
+
+   <!-- Sección de examen y plan -->
+   <label for="cliente-examenClinico">Examen Clínico</label>
+   <textarea id="cliente-examenClinico" required></textarea>
+
+   <label for="cliente-odontograma">Odontograma</label>
+   <textarea id="cliente-odontograma" required></textarea>
+
+   <label for="cliente-diagnostico">Diagnóstico</label>
+   <textarea id="cliente-diagnostico" required></textarea>
+
+   <label for="cliente-planTratamiento">Plan de Tratamiento</label>
+   <textarea id="cliente-planTratamiento" required></textarea>
+
+   <button type="submit">Registrar cliente</button>
+  </form>
+  <!-- Botones para buscar, modificar y eliminar paciente -->
+  <div class="acciones-clientes">
+   <button type="button" onclick="buscarCliente()">Buscar cliente</button>
+   <button type="button" onclick="modificarCliente()">Modificar cliente</button>
+   <button type="button" onclick="eliminarCliente()">Eliminar cliente</button>
+
+  </div>
+ </div>
+
+ <!-- Módulo de Manicuristas -->
+ <div id="manicurista" class="module">
+  <h2>Registro de manicuristas</h2>
+  <!-- Campo oculto para edición -->
+  <form id="form-manicuristas">
+   <input type="hidden" id="manicuristas-index" value="-1">
+
+   <label for="manicurista-id">Identificación</label>
+   <input type="text" id="manicurista-id" required>
+
+   <label for="manicurista-nombres">Nombres</label>
+   <input type="text" id="manicurista-nombres" required>
+
+   <label for="manicurista-telefono">Teléfono</label>
+   <input type="tel" id="manicurista-telefono" required>
+
+   <label for="manicurista-correo">Correo</label>
+   <input type="email" id="manicurista-correo" required>
+
+   <label for="manicurista-especialidad">Especialidad</label>
+   <input type="text" id="manicurista-especialidad" required>
+
+   <h3>Disponibilidad Mensual</h3>
+   <label for="disp-month">Mes de Disponibilidad:</label>
+   <input type="month" id="disp-month">
+
+   <p>Configure la disponibilidad para cada semana del mes. Las etiquetas de cada día se actualizarán con la fecha real
+    (por ejemplo: "Sábado 1 de marzo de 2025").</p>
+
+   <!-- Detalles de disponibilidad -->
+   <details data-week="1" style="display:none;">
+    <summary>Semana 1</summary>
+    <div class="week-availability">
+     <div class="dia" data-day-index="0">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem1-lunes-inicio">
+      <input type="time" id="disp-sem1-lunes-fin">
+     </div>
+     <div class="dia" data-day-index="1">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem1-martes-inicio">
+      <input type="time" id="disp-sem1-martes-fin">
+     </div>
+     <div class="dia" data-day-index="2">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem1-miercoles-inicio">
+      <input type="time" id="disp-sem1-miercoles-fin">
+     </div>
+     <div class="dia" data-day-index="3">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem1-jueves-inicio">
+      <input type="time" id="disp-sem1-jueves-fin">
+     </div>
+     <div class="dia" data-day-index="4">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem1-viernes-inicio">
+      <input type="time" id="disp-sem1-viernes-fin">
+     </div>
+     <div class="dia" data-day-index="5">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem1-sabado-inicio">
+      <input type="time" id="disp-sem1-sabado-fin">
+     </div>
+     <div class="dia" data-day-index="6">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem1-domingo-inicio">
+      <input type="time" id="disp-sem1-domingo-fin">
+     </div>
+    </div>
+   </details>
+
+   <details data-week="2" style="display:none;">
+    <summary>Semana 2</summary>
+    <div class="week-availability">
+     <div class="dia" data-day-index="0">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem2-lunes-inicio">
+      <input type="time" id="disp-sem2-lunes-fin">
+     </div>
+     <div class="dia" data-day-index="1">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem2-martes-inicio">
+      <input type="time" id="disp-sem2-martes-fin">
+     </div>
+     <div class="dia" data-day-index="2">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem2-miercoles-inicio">
+      <input type="time" id="disp-sem2-miercoles-fin">
+     </div>
+     <div class="dia" data-day-index="3">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem2-jueves-inicio">
+      <input type="time" id="disp-sem2-jueves-fin">
+     </div>
+     <div class="dia" data-day-index="4">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem2-viernes-inicio">
+      <input type="time" id="disp-sem2-viernes-fin">
+     </div>
+     <div class="dia" data-day-index="5">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem2-sabado-inicio">
+      <input type="time" id="disp-sem2-sabado-fin">
+     </div>
+     <div class="dia" data-day-index="6">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem2-domingo-inicio">
+      <input type="time" id="disp-sem2-domingo-fin">
+     </div>
+    </div>
+   </details>
+
+   <details data-week="3" style="display:none;">
+    <summary>Semana 3</summary>
+    <div class="week-availability">
+     <div class="dia" data-day-index="0">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem3-lunes-inicio">
+      <input type="time" id="disp-sem3-lunes-fin">
+     </div>
+     <div class="dia" data-day-index="1">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem3-martes-inicio">
+      <input type="time" id="disp-sem3-martes-fin">
+     </div>
+     <div class="dia" data-day-index="2">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem3-miercoles-inicio">
+      <input type="time" id="disp-sem3-miercoles-fin">
+     </div>
+     <div class="dia" data-day-index="3">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem3-jueves-inicio">
+      <input type="time" id="disp-sem3-jueves-fin">
+     </div>
+     <div class="dia" data-day-index="4">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem3-viernes-inicio">
+      <input type="time" id="disp-sem3-viernes-fin">
+     </div>
+     <div class="dia" data-day-index="5">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem3-sabado-inicio">
+      <input type="time" id="disp-sem3-sabado-fin">
+     </div>
+     <div class="dia" data-day-index="6">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem3-domingo-inicio">
+      <input type="time" id="disp-sem3-domingo-fin">
+     </div>
+    </div>
+   </details>
+
+   <details data-week="4" style="display:none;">
+    <summary>Semana 4</summary>
+    <div class="week-availability">
+     <div class="dia" data-day-index="0">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem4-lunes-inicio">
+      <input type="time" id="disp-sem4-lunes-fin">
+     </div>
+     <div class="dia" data-day-index="1">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem4-martes-inicio">
+      <input type="time" id="disp-sem4-martes-fin">
+     </div>
+     <div class="dia" data-day-index="2">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem4-miercoles-inicio">
+      <input type="time" id="disp-sem4-miercoles-fin">
+     </div>
+     <div class="dia" data-day-index="3">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem4-jueves-inicio">
+      <input type="time" id="disp-sem4-jueves-fin">
+     </div>
+     <div class="dia" data-day-index="4">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem4-viernes-inicio">
+      <input type="time" id="disp-sem4-viernes-fin">
+     </div>
+     <div class="dia" data-day-index="5">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem4-sabado-inicio">
+      <input type="time" id="disp-sem4-sabado-fin">
+     </div>
+     <div class="dia" data-day-index="6">
+      <label><span class="day-label"></span>:</label>
+      <input type="time" id="disp-sem4-domingo-inicio">
+      <input type="time" id="disp-sem4-domingo-fin">
+     </div>
+    </div>
+   </details>
+
+   <button type="submit">Guardar manicurista</button>
+  </form>
+
+  <!-- Sección de consulta y búsqueda de manicurista -->
+  <h3>Consulta de manicurista</h3>
+  <div class="buscar-manicurista">
+   <label for="buscar-manicurista">Buscar manicurista (Identificación o Nombres):</label>
+   <input type="text" id="buscar-manicurista" placeholder="Ingrese criterio de búsqueda">
+   <button type="button" onclick="buscarManicurista()">Buscar</button>
+  </div>
+  <table id="tabla-manicurista">
+   <thead>
+    <tr>
+     <th>Identificación</th>
+     <th>Nombres</th>
+     <th>Especialidad</th>
+     <th>Acciones</th>
+    </tr>
+   </thead>
+   <tbody>
+    <!-- Se llenará dinámicamente -->
+   </tbody>
+  </table>
+ </div>
+
+ <!-- Módulo de Agendamiento de Citas -->
+ <div id="agendamiento" class="module">
+  <h2>Agendar Cita</h2>
+  <div class="buscar-paciente">
+   <label for="buscar-paciente">Buscar cliente (Identificación o Nombres):</label>
+   <input type="text" id="buscar-paciente" placeholder="Ingrese criterio de búsqueda">
+   <button type="button" onclick="buscarPacienteAgendamiento()">Buscar</button>
+  </div>
+  <form id="form-agendamiento">
+   <label for="select-cliente">Cliente</label>
+   <select id="select-cliente" required>
+    <option value="">Seleccione un cliente</option>
+   </select>
+
+   <label for="select-manicurista">Manicurista</label>
+   <select id="select-manicurista" required>
+    <option value="">Seleccione una manicurista</option>
+   </select>
+
+   <label for="select-tratamiento">Tratamiento</label>
+   <select id="select-tratamiento" required>
+    <option value="">Seleccione un tratamiento</option>
+   </select>
+
+   <label for="cita-fecha">Fecha</label>
+   <input type="date" id="cita-fecha" required>
+
+   <label for="cita-hora">Hora</label>
+   <input type="time" id="cita-hora" required>
+
+   <button type="submit">Agendar Cita</button>
+  </form>
+ </div>
+
+ <!-- Módulo de Citas Agendadas -->
+ <div id="citas" class="module">
+  <h2>Citas Agendadas</h2>
+  <div class="filtro">
+   <label for="filter-nombre">Nombre del cliente:</label>
+   <input type="text" id="filter-nombre" placeholder="Buscar por nombre" list="datalist-pacientes">
+   <datalist id="datalist-pacientes"></datalist>
+
+   <label for="filter-nombre-odontologo">Nombre de manicurista</label>
+   <input type="text" id="filter-nombre-odontologo" placeholder="Buscar por nombre del odontólogo">
+
+   <label for="filter-id">Identificación (Cliente):</label>
+   <input type="text" id="filter-id" placeholder="Buscar por identificación">
+
+   <label for="filter-mes">Mes:</label>
+   <input type="month" id="filter-mes">
+
+   <label for="filter-dia">Día:</label>
+   <input type="date" id="filter-dia">
+
+   <button onclick="aplicarFiltro()">Aplicar Filtro</button>
+   <button onclick="limpiarFiltro()">Limpiar Filtro</button>
+  </div>
+  <div class="exportar">
+   <button onclick="exportarPDF()">Exportar a PDF</button>
+   <button onclick="exportarExcel()">Exportar a Excel</button>
+  </div>
+  <table id="tabla-citas">
+   <thead>
+    <tr>
+     <th>Cliente</th>
+     <th>Manicurista</th>
+     <th>Fecha</th>
+     <th>Hora</th>
+     <th>Tratamiento</th>
+     <th>Cumplida</th>
+     <th>Pagada</th>
+     <th>Valor Pagado</th>
+     <th>Acciones</th>
+    </tr>
+   </thead>
+   <tbody>
+    <!-- Se llenará dinámicamente -->
+   </tbody>
+  </table>
+  <div id="total-pagado" class="total">
+   Total Pagado: $0
+  </div>
+ </div>
+
+ <!-- Módulo de Tratamientos -->
+ <div id="tratamientos" class="module">
+  <h2>Registro de Tratamientos</h2>
+  <form id="form-tratamientos">
+   <label for="tratamiento-descripcion">Descripción</label>
+   <textarea id="tratamiento-descripcion" required></textarea>
+   <label for="tratamiento-precio">Precio</label>
+   <input type="number" id="tratamiento-precio" required step="0.01">
+   <button type="submit">Registrar Tratamiento</button>
+  </form>
+  <h3>Lista de Tratamientos</h3>
+  <ul id="lista-tratamientos"></ul>
+ </div>
+
+ <script src="script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,246 @@
+/* Estilos generales */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f9;
+}
+
+header {
+  background: linear-gradient(45deg, #2a9d8f, #264653);
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px;
+  flex-wrap: wrap;
+}
+
+nav button {
+  background: #e9c46a;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+nav button:hover {
+  background: #f4a261;
+}
+
+.module {
+  display: none;
+  padding: 20px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 8px;
+  max-width: 800px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.active {
+  display: block;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form input,
+form select,
+form textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form button {
+  background: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background: #21867a;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+table th,
+table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table th {
+  background: #2a9d8f;
+  color: white;
+}
+
+/* Estilos para filtros, exportación y búsquedas */
+.filtro,
+.exportar,
+.buscar-cliente,
+.buscar-manicurista {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.filtro label,
+.buscar-cliente label,
+.buscar-manicurista label {
+  font-weight: bold;
+}
+
+.filtro input,
+.buscar-cliente input,
+.buscar-manicurista input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.filtro button,
+.exportar button,
+.buscar-cliente button,
+.buscar-manicurista button {
+  background: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.filtro button:hover,
+.exportar button:hover,
+.buscar-cliente button:hover,
+.buscar-manicurista button:hover {
+  background: #21867a;
+}
+
+.total {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: right;
+  font-size: 1.2em;
+}
+
+/* Ocultar inicialmente las secciones de semana en manicuristas*/
+#manicurista details {
+  display: none;
+}
+
+/* Estilos para la disponibilidad mensual en manicuristas */
+.week-availability {
+  padding-left: 15px;
+  margin-bottom: 10px;
+}
+
+.week-availability .dia {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.week-availability label {
+  width: 150px;
+}
+
+/* Estilos para los botones de acciones en clientes */
+.acciones-clientes {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.acciones-clientes button {
+  background: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.acciones-clientes button:hover {
+  background: #21867a;
+}
+
+/* Estilos para la sección de Antecedentes */
+.antecedentes {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+.antecedentes legend {
+  font-weight: bold;
+  padding: 0 5px;
+}
+
+.antecedentes-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr;
+  gap: 5px;
+  align-items: center;
+}
+
+.antecedentes-header {
+  font-weight: bold;
+  text-align: center;
+  background: #f0f0f0;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.antecedente-label {
+  padding: 5px;
+}
+
+.antecedente-checkbox {
+  text-align: center;
+}
+
+.btn-manicurista-toggle {
+  background: #264653 !important;
+  margin: 15px 0;
+}
+
+.btn-manicurista-toggle:hover {
+  background: #1d3557 !important;
+}
+
+#manicurista-info {
+  border-top: 2px solid #2a9d8f;
+  padding-top: 15px;
+  margin-top: 10px;
+}
