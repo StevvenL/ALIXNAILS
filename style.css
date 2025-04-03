@@ -1,15 +1,29 @@
+/* Definición de variables CSS */
+:root {
+  --primary-color: #2a9d8f;
+  --secondary-color: #264653;
+  --highlight-color: #e9c46a;
+  --hover-color: #21867a;
+  --background-color: #f4f4f9;
+  --text-color: white;
+  --font-family: 'Arial', sans-serif;
+  --border-radius: 4px;
+  --padding: 10px;
+  --transition-duration: 0.3s;
+}
+
 /* Estilos generales */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: var(--font-family);
   margin: 0;
   padding: 0;
-  background: #f4f4f9;
+  background: var(--background-color);
 }
 
 header {
-  background: linear-gradient(45deg, #2a9d8f, #264653);
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
   padding: 20px;
-  color: white;
+  color: var(--text-color);
   text-align: center;
 }
 
@@ -22,13 +36,13 @@ nav {
 }
 
 nav button {
-  background: #e9c46a;
+  background: var(--highlight-color);
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.3s;
+  transition: background var(--transition-duration);
 }
 
 nav button:hover {
@@ -60,7 +74,7 @@ form select,
 form textarea {
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
 }
 
 form label {
@@ -68,17 +82,17 @@ form label {
 }
 
 form button {
-  background: #2a9d8f;
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-color);
   border: none;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background var(--transition-duration);
 }
 
 form button:hover {
-  background: #21867a;
+  background: var(--hover-color);
 }
 
 table {
@@ -95,8 +109,8 @@ table td {
 }
 
 table th {
-  background: #2a9d8f;
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-color);
 }
 
 /* Estilos para filtros, exportación y búsquedas */
@@ -122,27 +136,27 @@ table th {
 .buscar-manicurista input {
   padding: 5px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
 }
 
 .filtro button,
 .exportar button,
 .buscar-cliente button,
 .buscar-manicurista button {
-  background: #2a9d8f;
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-color);
   border: none;
   padding: 5px 10px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background var(--transition-duration);
 }
 
 .filtro button:hover,
 .exportar button:hover,
 .buscar-cliente button:hover,
 .buscar-manicurista button:hover {
-  background: #21867a;
+  background: var(--hover-color);
 }
 
 .total {
@@ -152,7 +166,7 @@ table th {
   font-size: 1.2em;
 }
 
-/* Ocultar inicialmente las secciones de semana en manicuristas*/
+/* Ocultar inicialmente las secciones de semana en manicuristas */
 #manicurista details {
   display: none;
 }
@@ -181,24 +195,24 @@ table th {
 }
 
 .acciones-clientes button {
-  background: #2a9d8f;
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-color);
   border: none;
   padding: 8px 15px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background var(--transition-duration);
 }
 
 .acciones-clientes button:hover {
-  background: #21867a;
+  background: var(--hover-color);
 }
 
 /* Estilos para la sección de Antecedentes */
 .antecedentes {
   border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   margin-top: 15px;
 }
 
@@ -219,7 +233,7 @@ table th {
   text-align: center;
   background: #f0f0f0;
   padding: 5px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
 }
 
 .antecedente-label {
@@ -240,7 +254,7 @@ table th {
 }
 
 #manicurista-info {
-  border-top: 2px solid #2a9d8f;
+  border-top: 2px solid var(--primary-color);
   padding-top: 15px;
   margin-top: 10px;
 }
